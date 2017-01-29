@@ -1,0 +1,116 @@
+/**
+ * The Alien class implements an alien (as a graphic circle).
+ * An alien has a location and a size. It also has methods for
+ * drawing, erasing, getting alive status, destroying, and movement.
+ */
+class Alien {
+    // location on screen
+    field int x, y;
+    // radius size
+    field int r;
+    // how many pixels to shift for every movement
+    field int stepSize;
+    // status of alien (alive or destroyed?)
+    field boolean alive;
+    
+    /**
+     * Constructs a new alien (as circle) with a given location and size.
+     * Parameters: posX -- the initial x-coordinate (int)
+     *             posY -- the initial y-coordinate (int)
+     *             alienSize -- the size of the alien (int)
+     */
+    constructor Alien new(int posX, int posY, int alienSize) {
+        let x = posX;
+        let y = posY;
+        let r = alienSize / 2;
+        let stepSize = alienSize;
+        let alive = true;
+        do draw();
+        return this;
+    }
+    
+    /** Returns the x-coordinate of the alien's location. */
+    method int getX() {
+        return (x - r);
+    }
+    
+    /** Returns the y-coordinate of the alien's location. */
+    method int getY() {
+        return (y - r);
+    }
+
+    /** Returns whether the alien's alive status. */
+    method boolean isAlive() {
+        return alive;
+    }
+
+    /** Draws the alien to the screen. */
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawCircle(x, y, r);
+        return;
+    }
+
+    /** Erases the alien from the screen. */
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawCircle(x, y, r);
+        return;
+    }
+
+    /** Moves the alien to the left by stepSize if move will not be out of bounds. */
+    method void moveLeft() {
+        // LEFT_BOUND = 20
+        if (x > (stepSize + 20)) {
+            let x = x - stepSize;
+            do draw();
+        }
+        return;
+    }
+    
+    /** Moves the alien to the right by stepSize if move will not be out out of bounds. */
+    method void moveRight() {
+        // RIGHT_BOUND = 490
+        if ((x + stepSize) < 490) {
+            let x = x + stepSize;
+            do draw();
+        }
+        return;
+    }
+    
+    /** 
+     * Moves the alien down by stepSize if move will not be out of bounds. 
+     * Returns boolean indicating whether alien is still within LOWER_BOUND.
+     */
+    method boolean moveDown() {
+        // LOWER_BOUND = 225
+        if ((y + stepSize) < 225) {
+            let y = y + stepSize;
+            do draw();
+        } else {
+            if (alive) {
+                let y = y + stepSize;
+                do draw();
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /** Clears the alien from the screen and sets alive status to false. (When alien is hit.) */
+    method void destroy() {
+        let alive = false;
+        do erase();
+        return;
+    }
+
+    /** Clears the alien from the screen and deallocates the object's memory. */
+    method void dispose() {
+        do erase();
+        do Memory.deAlloc(this);
+        return;
+    }
+    
+}
+
+

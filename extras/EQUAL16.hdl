@@ -1,0 +1,34 @@
+/**
+ * 16-bitwise Equivalence gate
+ */
+
+
+CHIP EQUAL16 {
+     IN a[16], b[16];
+     OUT out;
+
+     PARTS:
+     Not16(in=b, out=notB);
+     And(a=a[0], b=notB[0], out=w0);
+     And(a=a[1], b=notB[1], out=w1);
+     And(a=a[2], b=notB[2], out=w2);
+     And(a=a[3], b=notB[3], out=w3);
+     And(a=a[4], b=notB[4], out=w4);
+     And(a=a[5], b=notB[5], out=w5);
+     And(a=a[6], b=notB[6], out=w6);
+     And(a=a[7], b=notB[7], out=w7);
+     And(a=a[8], b=notB[8], out=w8);
+     And(a=a[9], b=notB[9], out=w9);
+     And(a=a[10], b=notB[10], out=w10);
+     And(a=a[11], b=notB[11], out=w11);
+     And(a=a[12], b=notB[12], out=w12);
+     And(a=a[13], b=notB[13], out=w13);
+     And(a=a[14], b=notB[14], out=w14);
+     And(a=a[15], b=notB[15], out=w15);
+     4WayAnd(a=w0, b=w1, c=w2, d=w3, out=out1);
+     4WayAnd(a=w4, b=w5, c=w6, d=w7, out=out2);
+     4WayAnd(a=w8, b=w9, c=w10, d=w11, out=out3);
+     4WayAnd(a=w12, b=w13, c=w14, d=w15, out=out4);
+     4WayAnd(a=out1, b=out2, c=out3, d=out4, out=out);
+}
+

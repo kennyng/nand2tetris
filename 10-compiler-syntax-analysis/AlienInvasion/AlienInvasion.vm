@@ -1,0 +1,772 @@
+function AlienInvasion.new 0
+push constant 13
+call Memory.alloc 1
+pop pointer 0
+push constant 30
+pop this 2
+push constant 20
+pop this 4
+push constant 2
+pop this 8
+push constant 0
+pop this 9
+push constant 0
+pop this 10
+push constant 0
+pop this 11
+push constant 0
+not
+pop this 12
+call GameBoard.new 0
+pop this 0
+push this 2
+call Player.new 1
+pop this 1
+push constant 50
+pop this 6
+push constant 50
+call Array.new 1
+pop this 5
+push pointer 0
+push this 6
+call AlienInvasion.createAlienArmy 2
+pop temp 0
+push pointer 0
+return
+function AlienInvasion.createAlienArmy 6
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+push constant 30
+pop local 3
+push constant 12
+pop local 4
+push constant 5
+pop local 5
+label WHILE_EXP0
+push local 0
+push this 6
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END0
+push constant 0
+pop local 1
+push constant 30
+push this 4
+push constant 2
+call Math.divide 2
+add
+pop local 2
+label WHILE_EXP1
+push local 1
+push constant 10
+lt
+not
+if-goto WHILE_END1
+push local 0
+push this 5
+add
+push local 2
+push local 3
+push this 4
+call Alien.new 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push local 4
+add
+push this 4
+add
+pop local 2
+push local 0
+push constant 1
+add
+pop local 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 3
+push local 5
+add
+push this 4
+add
+pop local 3
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function AlienInvasion.run 3
+push argument 0
+pop pointer 0
+push constant 0
+not
+pop local 0
+push constant 0
+pop local 1
+push constant 0
+pop local 2
+label WHILE_EXP0
+push this 11
+not
+not
+if-goto WHILE_END0
+push constant 250
+call Sys.wait 1
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+push local 1
+push constant 10
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop local 1
+push pointer 0
+call AlienInvasion.clearAliens 1
+pop temp 0
+push local 2
+push constant 7
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+call AlienInvasion.moveAliensDown 1
+pop temp 0
+push local 0
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+pop local 0
+goto IF_END2
+label IF_FALSE2
+push constant 0
+not
+pop local 0
+label IF_END2
+push constant 0
+pop local 2
+goto IF_END1
+label IF_FALSE1
+push pointer 0
+push local 0
+call AlienInvasion.moveAliensLeftRight 2
+pop temp 0
+push constant 0
+pop local 1
+push local 2
+push constant 1
+add
+pop local 2
+label IF_END1
+label IF_FALSE0
+push this 11
+not
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+call AlienInvasion.controlLasers 1
+pop temp 0
+push pointer 0
+call AlienInvasion.controlPlayerFromInput 1
+pop temp 0
+label IF_FALSE3
+goto WHILE_EXP0
+label WHILE_END0
+push pointer 0
+call AlienInvasion.printGameEndMessage 1
+pop temp 0
+push constant 0
+return
+function AlienInvasion.clearAliens 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push this 6
+lt
+not
+if-goto WHILE_END0
+push local 1
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Alien.isAlive 1
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+call Alien.erase 1
+pop temp 0
+label IF_FALSE0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function AlienInvasion.moveAliensDown 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push this 6
+lt
+not
+if-goto WHILE_END0
+push local 1
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Alien.isAlive 1
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+call Alien.moveDown 1
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+not
+pop this 11
+push constant 0
+pop this 12
+label IF_FALSE1
+label IF_FALSE0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function AlienInvasion.moveAliensLeftRight 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+push argument 1
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+label WHILE_EXP0
+push local 1
+push this 6
+lt
+not
+if-goto WHILE_END0
+push local 1
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Alien.isAlive 1
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+call Alien.moveRight 1
+pop temp 0
+label IF_FALSE1
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+goto IF_END0
+label IF_FALSE0
+label WHILE_EXP1
+push local 1
+push this 6
+lt
+not
+if-goto WHILE_END1
+push local 1
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Alien.isAlive 1
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+call Alien.moveLeft 1
+pop temp 0
+label IF_FALSE2
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+label IF_END0
+push constant 0
+return
+function AlienInvasion.controlLasers 7
+push argument 0
+pop pointer 0
+push this 9
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 7
+call Laser.move 1
+pop local 0
+push local 0
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 7
+call Laser.dispose 1
+pop temp 0
+push constant 0
+pop this 9
+goto IF_END1
+label IF_FALSE1
+push this 7
+call Laser.getX 1
+pop local 1
+push this 7
+call Laser.getY 1
+pop local 2
+push constant 0
+pop local 6
+label WHILE_EXP0
+push local 6
+push this 6
+lt
+not
+if-goto WHILE_END0
+push local 6
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Alien.isAlive 1
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 5
+call Alien.getX 1
+pop local 3
+push local 5
+call Alien.getY 1
+pop local 4
+push local 1
+push local 3
+push constant 1
+sub
+gt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 1
+push local 3
+push this 4
+add
+push constant 1
+sub
+lt
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push local 2
+push local 4
+push constant 1
+sub
+gt
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push local 2
+push local 4
+push this 4
+add
+push constant 1
+sub
+lt
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push this 7
+call Laser.dispose 1
+pop temp 0
+push constant 0
+pop this 9
+push local 5
+call Alien.destroy 1
+pop temp 0
+push this 0
+call GameBoard.updateScore 1
+pop temp 0
+push this 6
+pop local 6
+label IF_FALSE6
+label IF_FALSE5
+label IF_FALSE4
+label IF_FALSE3
+label IF_FALSE2
+push local 6
+push constant 1
+add
+pop local 6
+goto WHILE_EXP0
+label WHILE_END0
+push pointer 0
+call AlienInvasion.checkAliens 1
+pop this 11
+label IF_END1
+label IF_FALSE0
+push constant 0
+return
+function AlienInvasion.checkAliens 3
+push argument 0
+pop pointer 0
+push constant 0
+not
+pop local 0
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 2
+push this 6
+lt
+not
+if-goto WHILE_END0
+push local 2
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+call Alien.isAlive 1
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop local 0
+push this 6
+pop local 2
+label IF_FALSE0
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+return
+function AlienInvasion.controlPlayerFromInput 1
+push argument 0
+pop pointer 0
+call Keyboard.keyPressed 0
+pop local 0
+push local 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop this 10
+goto IF_END0
+label IF_FALSE0
+push local 0
+push constant 130
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 1
+pop this 10
+goto IF_END1
+label IF_FALSE1
+push local 0
+push constant 132
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 2
+pop this 10
+goto IF_END2
+label IF_FALSE2
+push local 0
+push constant 32
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+call AlienInvasion.shootLaser 1
+pop temp 0
+goto IF_END3
+label IF_FALSE3
+push local 0
+push constant 140
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+not
+pop this 11
+push constant 0
+pop this 12
+label IF_FALSE4
+label IF_END3
+label IF_END2
+label IF_END1
+label IF_END0
+push pointer 0
+call AlienInvasion.movePlayer 1
+pop temp 0
+push constant 0
+return
+function AlienInvasion.shootLaser 1
+push argument 0
+pop pointer 0
+push this 9
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop this 9
+push this 1
+call Player.getX 1
+push this 2
+push constant 2
+call Math.divide 2
+push this 8
+push constant 2
+call Math.divide 2
+sub
+add
+pop local 0
+push local 0
+push this 8
+call Laser.new 2
+pop this 7
+push this 0
+call GameBoard.updateShotsTaken 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function AlienInvasion.movePlayer 0
+push argument 0
+pop pointer 0
+push this 10
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push this 10
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 1
+call Player.moveLeft 1
+pop temp 0
+label IF_FALSE1
+push this 10
+push constant 2
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 1
+call Player.moveRight 1
+pop temp 0
+label IF_FALSE2
+push constant 0
+return
+function AlienInvasion.printGameEndMessage 0
+push argument 0
+pop pointer 0
+push this 12
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 8
+push constant 19
+call Output.moveCursor 2
+pop temp 0
+push constant 25
+call String.new 1
+push constant 67
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 71
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 85
+call String.appendChar 2
+push constant 76
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 44
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 89
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 85
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 87
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+goto IF_END0
+label IF_FALSE0
+push constant 8
+push constant 26
+call Output.moveCursor 2
+pop temp 0
+push constant 10
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 86
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+label IF_END0
+push constant 0
+return
+function AlienInvasion.dispose 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push this 6
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END0
+push local 1
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+push constant 0
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+call Alien.dispose 1
+pop temp 0
+label IF_FALSE0
+goto WHILE_EXP0
+label WHILE_END0
+call invaders.dispose 0
+pop temp 0
+push this 1
+call Player.dispose 1
+pop temp 0
+call status.dispose 0
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

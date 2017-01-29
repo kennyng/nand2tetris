@@ -1,0 +1,34 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/03/a/PC.hdl
+
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t]==1) out[t+1] = 0
+ * else if (load[t]==1)  out[t+1] = in[t]
+ * else if (inc[t]==1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                  out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    // determine whether to store new value (0, out[t]+1,in[t]) or just return out[t]
+    Or(a=load, b=inc, out=load1);
+    Or(a=load1, b=reset, out=load2);
+
+    Register(in=w3, load=load2, out=w0, out=out);
+
+    // increment existing value
+    Inc16(in=w0, out=outInc);
+
+    // load
+    Mux16(a=outInc, b=in, sel=load, out=w2);
+    
+    // reset
+    Mux16(a=w2, b=false, sel=reset, out=w3);
+}
+

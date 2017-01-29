@@ -1,0 +1,86 @@
+/**
+ * The Player class implements the player who controls the laser cannon
+ * (as a graphic rectangle with a smaller rectange on top). A player has
+ * a location and a size. It also has methods for drawing, erasing, and
+ * movement on the screen.
+ */
+class Player {
+    // the location of the player
+    field int x, y;
+    // the size of the player (laser cannon)
+    field int size;
+    // how many pixels to shift for every movement
+    field in stepSize;
+    
+    /**
+     * Constructs a new player given a size. The player starts at default location.
+     * Parameters: playerSize -- the size of the player (int)
+     */
+    constructor Player new(int playerSize) {
+        let size = playerSize;
+        let stepSize = playerSize / 2;
+        // INITAL_X_COORDINATE = 238
+        let x = 238;
+        // FIXED_Y_COORDINATE = 236
+        let y = 236;
+        do draw();
+        return this;
+    }
+    
+    /** Returns the x-coordinate of the player's location. */
+    method int getX() {
+        return x;
+    }
+    
+    /** Returns the size of the player. */
+    method int getSize() {
+        return size;
+    }
+    
+    /** Draws the player to the screen. */
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle((x + 12), y, (x + 18), (y + 6));
+        do Screen.drawRectangle(x, (y + 6), (x + size), (y + 12));
+        return;
+    }
+    
+    /** Erases the player from the screen. */
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle((x + 12), y, (x + 18), (y + 6));
+        do Screen.drawRectangle(x, (y + 6), (x + size), (y + 12));
+        return;
+    }
+    
+    /** Moves the player to the left by stepSize if move will not be out of bounds. */
+    method void moveLeft() {
+        // LEFT_BOUND = 5
+        if ((x - stepSize) > 5) {
+            do erase();
+            let x = x - stepSize;
+            do draw();
+        }
+        return;
+    }
+
+    /** Moves the player to the right by stepSize if move will not be out of bounds. */
+    method void moveRight() {
+        // RIGHT_BOUND = 490
+        if ((x + (2 * stepSize)) < 490) {
+            do erase();
+            let x = x + stepSize;
+            do draw();
+        }
+        return;
+    }
+    
+    /** Deallocates the object's memory. */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+    
+}
+    
+

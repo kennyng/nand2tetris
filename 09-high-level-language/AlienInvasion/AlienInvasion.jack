@@ -1,0 +1,350 @@
+/**
+ * The AlienInvasion class implments a single game session of the Alien Invasion game.
+ * It sets up the various pieces necessary for the game (Laser, Player, Alien, GameBoard), takes
+ * user inputs, and handles the running of the game.
+ */
+class AlienInvasion {
+    field GameBoard board;
+    field Player player;
+    field int playerSize;
+    field Alien alien;
+    field int alienSize;
+    field Array aliens;
+    field int numAliens;
+    field Laser laser;
+    field int laserSize;
+    // laser beam on screen? (player can only shoot 1 laser beam at a time)
+    field boolean shotOnScreen;
+    // the direction to move the player according to keyboard input
+    field int direction;
+    // status flag indicating whether to exit the game
+    field boolean exit;
+    // status flag indicating whether the player has won the game (destroyed all aliens)
+    field boolean win;
+
+    /**
+     * Creates a new AlienInvasion game.
+     */
+    constructor AlienInvasion new() {
+        let playerSize = 30;
+        let alienSize = 20;
+        let laserSize = 2;
+        let shotOnScreen = false;
+        let direction = 0;
+        let exit = false;
+        let win = true;
+        
+        // Set up game board: status bar and boundary markers
+        let board = GameBoard.new(); 
+        
+        // Create player
+        let player = Player.new(playerSize);
+
+        // Create aliens
+        let numAliens = 50;
+        let aliens = Array.new(50);
+        do createAlienArmy(numAliens);
+        
+        return this;
+    }
+    
+    /** Creates the specified number of aliens and adds it to an array. */
+    method void createAlienArmy(int alienCount) {
+        var int i, count, x, y, horizontalSpace, verticalSpace;
+        
+        let i = 0;
+        let y = 30; 
+        let horizontalSpace = 12;
+        let verticalSpace = 5;
+        
+        while (i < (numAliens - 1)) {
+            let count = 0;
+            let x = 30 + (alienSize / 2);
+            while (count < 10) {
+                let aliens[i] = Alien.new(x, y, alienSize);
+                let x = x + horizontalSpace + alienSize;
+                let i = i + 1;
+                let count = count + 1;
+            }
+            let y = y + verticalSpace + alienSize;
+        }
+        return;
+    }
+    
+    /** 
+     * Runs the game by controlling the alien, laser beam, and player movements until 
+     * the game ends: either because player voluntarily exiting the game, all aliens 
+     * are destroyed, or the alien army reaches the player.
+     */
+    method void run() {
+        var boolean right;
+        var int delayCount, shiftDownCount;
+        
+        let right = true;
+        let delayCount = 0;
+        let shiftDownCount = 0;
+    
+        while(~exit) {
+            do Sys.wait(250);
+            
+            // Control Alien Army
+            let delayCount = delayCount + 1;
+            if (delayCount = 10) {
+                let delayCount = 0;
+                do clearAliens();
+                // after the aliens have shifted left/right 7 times, move all down 1 level
+                if (shiftDownCount = 7) {
+                    do moveAliensDown();
+                    if (right) {
+                        let right = false;
+                    } else {
+                        let right = true;
+                    }
+                    let shiftDownCount = 0;
+                } else {
+                    do moveAliensLeftRight(right);
+                    let delayCount = 0;
+                    let shiftDownCount = shiftDownCount + 1;
+                }
+            }
+            if (~exit) {                 
+                // Control Lasers
+                do controlLasers();
+          
+                // Detect keyboard input and control player
+                do controlPlayerFromInput();
+            }
+        }
+        
+        do printGameEndMessage();
+        return;
+    }
+    
+    /** Erases array of aliens (alien army) from the screen. */
+    method void clearAliens() {
+        var Alien thisAlien;
+        var int i;
+        
+        let i = 0;
+        while (i < numAliens) {
+            let thisAlien = aliens[i];
+            if (thisAlien.isAlive()) {
+                do thisAlien.erase();
+            }
+            let i = i + 1;
+        }
+        return;
+    }
+    
+    /** Shifts all aliens in the array down one level. */
+    method void moveAliensDown() {
+         var Alien thisAlien;
+         var int i;
+         
+         let i = 0; 
+         while (i < numAliens) {
+            let thisAlien = aliens[i];
+            if (thisAlien.isAlive()) {
+                // game ends if alien reaches past the base boundary line
+                if(~(thisAlien.moveDown())) {
+                    let exit = true;
+                    let win = false;
+                }
+            }
+            let i = i + 1;
+        }
+        return;
+    }
+    
+    /** Shifts all aliens in the array either to the left or to the right. */
+    method void moveAliensLeftRight(boolean moveRight) {
+        var Alien thisAlien;
+        var int i;
+        
+        let i = 0;
+        if (moveRight) {
+            while (i < numAliens) {
+                let thisAlien = aliens[i];
+                if (thisAlien.isAlive()) {
+                    do thisAlien.moveRight();
+                }
+                let i = i + 1;    
+            }
+        } else {
+            while (i < numAliens) {
+                let thisAlien = aliens[i];
+                if (thisAlien.isAlive()) {
+                    do thisAlien.moveLeft();
+                }
+                let i = i + 1;    
+            }
+        }
+        return;
+    }
+    
+    /** 
+     * When laser is shot (on screen), this function handles the laser beam's movement. 
+     * It also determines if laser has hit alien and updates score appropriately. 
+     */
+    method void controlLasers() {
+        var boolean laserMoving;
+        var int laserX, laserY;
+        var int alienX, alienY;
+        var Alien thisAlien;
+        var int i;
+        
+        if (shotOnScreen) {
+            let laserMoving = laser.move();
+            if (~laserMoving) {
+                do laser.dispose();
+                let shotOnScreen = false;
+            } else {
+                // Check if lasers hit aliens
+                let laserX = laser.getX();
+                let laserY = laser.getY();
+                let i = 0;
+                
+                while (i < numAliens) {
+                    let thisAlien = aliens[i];
+                    if (thisAlien.isAlive()) {
+                        let alienX =  thisAlien.getX();
+                        let alienY = thisAlien.getY();
+                        
+                        // Check if x, y coordinates on target
+                        if (laserX > (alienX - 1)) {
+                            if (laserX < (alienX + alienSize - 1)) {
+                                if (laserY > (alienY - 1)) {
+                                    if (laserY < (alienY + alienSize - 1)) {
+                                        do laser.dispose();
+                                        let shotOnScreen = false;
+                                        do thisAlien.destroy();
+                                        do board.updateScore();
+                                        let i = numAliens;
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                    let i = i + 1;   
+                }
+                // Check if any invaders still remain
+                let exit = checkAliens();
+            }
+        }
+        
+        return;
+    }
+    
+    /** Determines whether all aliens have been hit by laser or not. Returns boolean. */
+    method boolean checkAliens() {
+        var boolean allAliensDestroyed;
+        var Alien thisAlien;
+        var int i;
+        
+        let allAliensDestroyed = true;
+        let i = 0;
+        while (i < numAliens) {
+            let thisAlien = aliens[i];
+            if (thisAlien.isAlive()) {
+                let allAliensDestroyed = false;
+                let i = numAliens;
+            }
+            let i = i + 1;
+        }
+        
+        return allAliensDestroyed;
+    }
+    
+    /** Retrieves the player's input from keyboard and directs to appropriate course of action. */
+    method void controlPlayerFromInput() {
+        var char inputKey;
+        let inputKey = Keyboard.keyPressed();
+        
+        // NO KEY PRESSED = 0
+        if (inputKey = 0) {
+            let direction = 0;
+        } else {
+            // LEFT ARROW = 130
+            if (inputKey = 130) {
+                let direction = 1;
+            } else {
+                // RIGHT ARROW = 132
+                if (inputKey = 132) {
+                    let direction = 2;
+                } else {            
+                    // SPACEBAR = 32
+                    if (inputKey = 32) {
+                        do shootLaser();
+                    } else { 
+                        // ESC = 140
+                        if (inputKey = 140) {
+                            let exit = true;
+                            let win = false;
+                        }
+                    }
+                }
+            }
+        }
+        do movePlayer();
+        return;
+    }
+    
+    /** Creates new laser object and draws to screen. shotsTaken, score updated in status bar. */
+    method void shootLaser() {
+        var int x;
+        if (~shotOnScreen) {
+            let shotOnScreen = true;
+            let x = player.getX() + ((playerSize/2) - (laserSize/2));
+            let laser = Laser.new(x, laserSize);
+            do board.updateShotsTaken();
+        }
+        return;
+    }
+    
+    /** Moves player depending on the direction from input. 0 = NO MOVE, 1 = LEFT, 2 = RIGHT */
+    method void movePlayer() {
+        if (direction = 0) {
+            return;
+        }
+        if (direction = 1) {
+            do player.moveLeft();
+        }
+        if (direction = 2) {
+            do player.moveRight();
+        }
+        return;
+    }
+    
+    /** Outputs message to screen when game terminates. */
+    method void printGameEndMessage() {
+        if (win) {
+            do Output.moveCursor(8, 19);
+            do Output.printString("CONGRATULATIONS, YOU WIN!");
+        } else {
+            //do clearAliens();
+            do Output.moveCursor(8, 26);
+            do Output.printString("GAME OVER!");
+        }
+        return;
+    }
+    
+    /** Deallocates this object's memory and memory of all other associated objects.*/
+    method void dispose() {
+        var Alien thisAlien;
+        var int i;
+        
+        let i = 0;
+        while (i < (numAliens - 1)) {
+            let thisAlien = aliens[i];
+            if (~(thisAlien = null)) {
+                do thisAlien.dispose();
+            }
+        }
+        do invaders.dispose();
+        do player.dispose();
+        do status.dispose();
+        do Memory.deAlloc(this);
+        return;  
+    }
+  
+}

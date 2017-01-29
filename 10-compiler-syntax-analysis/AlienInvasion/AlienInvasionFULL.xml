@@ -1,0 +1,1825 @@
+<class>
+  <keyword> class </keyword>
+  <identifier> AlienInvasion </identifier>
+  <symbol> { </symbol>
+  <classVarDec>
+    <keyword> field </keyword>
+    <identifier> GameBoard </identifier>
+    <identifier> board </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <identifier> Player </identifier>
+    <identifier> player </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <keyword> int </keyword>
+    <identifier> playerSize </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <identifier> Alien </identifier>
+    <identifier> alien </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <keyword> int </keyword>
+    <identifier> alienSize </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <identifier> Array </identifier>
+    <identifier> aliens </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <keyword> int </keyword>
+    <identifier> numAliens </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <identifier> Laser </identifier>
+    <identifier> laser </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <keyword> int </keyword>
+    <identifier> laserSize </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <keyword> boolean </keyword>
+    <identifier> shotOnScreen </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <keyword> int </keyword>
+    <identifier> direction </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <keyword> boolean </keyword>
+    <identifier> exit </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <classVarDec>
+    <keyword> field </keyword>
+    <keyword> boolean </keyword>
+    <identifier> win </identifier>
+    <symbol> ; </symbol>
+  </classVarDec>
+  <subroutineDec>
+    <keyword> constructor </keyword>
+    <identifier> AlienInvasion </identifier>
+    <identifier> new </identifier>
+    <symbol> ( </symbol>
+    <parameterList>
+    </parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> playerSize </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 30 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> alienSize </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 20 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> laserSize </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 2 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> shotOnScreen </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <keyword> false </keyword>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> direction </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> exit </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <keyword> false </keyword>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> win </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <keyword> true </keyword>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> board </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <identifier> GameBoard </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> player </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <identifier> Player </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <expressionList>
+                <expression>
+                  <term>
+                    <identifier> playerSize </identifier>
+                  </term>
+                </expression>
+              </expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> numAliens </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 50 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> aliens </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <identifier> Array </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <expressionList>
+                <expression>
+                  <term>
+                    <integerConstant> 50 </integerConstant>
+                  </term>
+                </expression>
+              </expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> createAlienArmy </identifier>
+          <symbol> ( </symbol>
+          <expressionList>
+            <expression>
+              <term>
+                <identifier> numAliens </identifier>
+              </term>
+            </expression>
+          </expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <expression>
+            <term>
+              <keyword> this </keyword>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>
+    </subroutineBody>
+  </subroutineDec>
+  <subroutineDec>
+    <keyword> method </keyword>
+    <keyword> void </keyword>
+    <identifier> createAlienArmy </identifier>
+    <symbol> ( </symbol>
+    <parameterList>
+      <keyword> int </keyword>
+      <identifier> alienCount </identifier>
+    </parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> i </identifier>
+        <symbol> , </symbol>
+        <identifier> count </identifier>
+        <symbol> , </symbol>
+        <identifier> x </identifier>
+        <symbol> , </symbol>
+        <identifier> y </identifier>
+        <symbol> , </symbol>
+        <identifier> horizontalSpace </identifier>
+        <symbol> , </symbol>
+        <identifier> verticalSpace </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> i </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> y </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 30 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> horizontalSpace </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 12 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> verticalSpace </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 5 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <whileStatement>
+          <keyword> while </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> i </identifier>
+            </term>
+            <symbol> &lt; </symbol>
+            <term>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <identifier> numAliens </identifier>
+                </term>
+                <symbol> - </symbol>
+                <term>
+                  <integerConstant> 1 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> count </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <integerConstant> 0 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> x </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <integerConstant> 30 </integerConstant>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <symbol> ( </symbol>
+                  <expression>
+                    <term>
+                      <identifier> alienSize </identifier>
+                    </term>
+                    <symbol> / </symbol>
+                    <term>
+                      <integerConstant> 2 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ) </symbol>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <whileStatement>
+              <keyword> while </keyword>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <identifier> count </identifier>
+                </term>
+                <symbol> &lt; </symbol>
+                <term>
+                  <integerConstant> 10 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+              <symbol> { </symbol>
+              <statements>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> aliens </identifier>
+                  <symbol> [ </symbol>
+                  <expression>
+                    <term>
+                      <identifier> i </identifier>
+                    </term>
+                  </expression>
+                  <symbol> ] </symbol>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <identifier> Alien </identifier>
+                      <symbol> . </symbol>
+                      <identifier> new </identifier>
+                      <symbol> ( </symbol>
+                      <expressionList>
+                        <expression>
+                          <term>
+                            <identifier> x </identifier>
+                          </term>
+                        </expression>
+                        <symbol> , </symbol>
+                        <expression>
+                          <term>
+                            <identifier> y </identifier>
+                          </term>
+                        </expression>
+                        <symbol> , </symbol>
+                        <expression>
+                          <term>
+                            <identifier> alienSize </identifier>
+                          </term>
+                        </expression>
+                      </expressionList>
+                      <symbol> ) </symbol>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> x </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <identifier> x </identifier>
+                    </term>
+                    <symbol> + </symbol>
+                    <term>
+                      <identifier> horizontalSpace </identifier>
+                    </term>
+                    <symbol> + </symbol>
+                    <term>
+                      <identifier> alienSize </identifier>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> i </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <identifier> i </identifier>
+                    </term>
+                    <symbol> + </symbol>
+                    <term>
+                      <integerConstant> 1 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> count </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <identifier> count </identifier>
+                    </term>
+                    <symbol> + </symbol>
+                    <term>
+                      <integerConstant> 1 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+              </statements>
+              <symbol> } </symbol>
+            </whileStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> y </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> y </identifier>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <identifier> verticalSpace </identifier>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <identifier> alienSize </identifier>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+          </statements>
+          <symbol> } </symbol>
+        </whileStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>
+    </subroutineBody>
+  </subroutineDec>
+  <subroutineDec>
+    <keyword> method </keyword>
+    <keyword> void </keyword>
+    <identifier> run </identifier>
+    <symbol> ( </symbol>
+    <parameterList>
+    </parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> boolean </keyword>
+        <identifier> right </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> delayCount </identifier>
+        <symbol> , </symbol>
+        <identifier> shiftDownCount </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> right </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <keyword> true </keyword>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> delayCount </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> shiftDownCount </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <whileStatement>
+          <keyword> while </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <symbol> ~ </symbol>
+              <term>
+                <identifier> exit </identifier>
+              </term>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <doStatement>
+              <keyword> do </keyword>
+              <identifier> Sys </identifier>
+              <symbol> . </symbol>
+              <identifier> wait </identifier>
+              <symbol> ( </symbol>
+              <expressionList>
+                <expression>
+                  <term>
+                    <integerConstant> 250 </integerConstant>
+                  </term>
+                </expression>
+              </expressionList>
+              <symbol> ) </symbol>
+              <symbol> ; </symbol>
+            </doStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> delayCount </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> delayCount </identifier>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <integerConstant> 1 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <ifStatement>
+              <keyword> if </keyword>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <identifier> delayCount </identifier>
+                </term>
+                <symbol> = </symbol>
+                <term>
+                  <integerConstant> 10 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+              <symbol> { </symbol>
+            <statements>
+              <letStatement>
+                <keyword> let </keyword>
+                <identifier> delayCount </identifier>
+                <symbol> = </symbol>
+                <expression>
+                  <term>
+                    <integerConstant> 0 </integerConstant>
+                  </term>
+                </expression>
+                <symbol> ; </symbol>
+              </letStatement>
+              <doStatement>
+                <keyword> do </keyword>
+                <identifier> clearAliens </identifier>
+                <symbol> ( </symbol>
+                <expressionList>
+                </expressionList>
+                <symbol> ) </symbol>
+                <symbol> ; </symbol>
+              </doStatement>
+              <ifStatement>
+                <keyword> if </keyword>
+                <symbol> ( </symbol>
+                <expression>
+                  <term>
+                    <identifier> shiftDownCount </identifier>
+                  </term>
+                  <symbol> = </symbol>
+                  <term>
+                    <integerConstant> 7 </integerConstant>
+                  </term>
+                </expression>
+                <symbol> ) </symbol>
+                <symbol> { </symbol>
+              <statements>
+                <doStatement>
+                  <keyword> do </keyword>
+                  <identifier> moveAliensDown </identifier>
+                  <symbol> ( </symbol>
+                  <expressionList>
+                  </expressionList>
+                  <symbol> ) </symbol>
+                  <symbol> ; </symbol>
+                </doStatement>
+                <ifStatement>
+                  <keyword> if </keyword>
+                  <symbol> ( </symbol>
+                  <expression>
+                    <term>
+                      <identifier> right </identifier>
+                    </term>
+                  </expression>
+                  <symbol> ) </symbol>
+                  <symbol> { </symbol>
+                <statements>
+                  <letStatement>
+                    <keyword> let </keyword>
+                    <identifier> right </identifier>
+                    <symbol> = </symbol>
+                    <expression>
+                      <term>
+                        <keyword> false </keyword>
+                      </term>
+                    </expression>
+                    <symbol> ; </symbol>
+                  </letStatement>
+                </statements>
+                  <symbol> } </symbol>
+                  <keyword> else </keyword>
+                  <symbol> { </symbol>
+                  <statements>
+                    <letStatement>
+                      <keyword> let </keyword>
+                      <identifier> right </identifier>
+                      <symbol> = </symbol>
+                      <expression>
+                        <term>
+                          <keyword> true </keyword>
+                        </term>
+                      </expression>
+                      <symbol> ; </symbol>
+                    </letStatement>
+                  </statements>
+                  <symbol> } </symbol>
+                </ifStatement>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> shiftDownCount </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <integerConstant> 0 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+              </statements>
+                <symbol> } </symbol>
+                <keyword> else </keyword>
+                <symbol> { </symbol>
+                <statements>
+                  <doStatement>
+                    <keyword> do </keyword>
+                    <identifier> moveAliensLeftRight </identifier>
+                    <symbol> ( </symbol>
+                    <expressionList>
+                      <expression>
+                        <term>
+                          <identifier> right </identifier>
+                        </term>
+                      </expression>
+                    </expressionList>
+                    <symbol> ) </symbol>
+                    <symbol> ; </symbol>
+                  </doStatement>
+                  <letStatement>
+                    <keyword> let </keyword>
+                    <identifier> delayCount </identifier>
+                    <symbol> = </symbol>
+                    <expression>
+                      <term>
+                        <integerConstant> 0 </integerConstant>
+                      </term>
+                    </expression>
+                    <symbol> ; </symbol>
+                  </letStatement>
+                  <letStatement>
+                    <keyword> let </keyword>
+                    <identifier> shiftDownCount </identifier>
+                    <symbol> = </symbol>
+                    <expression>
+                      <term>
+                        <identifier> shiftDownCount </identifier>
+                      </term>
+                      <symbol> + </symbol>
+                      <term>
+                        <integerConstant> 1 </integerConstant>
+                      </term>
+                    </expression>
+                    <symbol> ; </symbol>
+                  </letStatement>
+                </statements>
+                <symbol> } </symbol>
+              </ifStatement>
+            </statements>
+              <symbol> } </symbol>
+            </ifStatement>
+            <ifStatement>
+              <keyword> if </keyword>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <symbol> ~ </symbol>
+                  <term>
+                    <identifier> exit </identifier>
+                  </term>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+              <symbol> { </symbol>
+            <statements>
+              <doStatement>
+                <keyword> do </keyword>
+                <identifier> controlLasers </identifier>
+                <symbol> ( </symbol>
+                <expressionList>
+                </expressionList>
+                <symbol> ) </symbol>
+                <symbol> ; </symbol>
+              </doStatement>
+              <doStatement>
+                <keyword> do </keyword>
+                <identifier> controlPlayerFromInput </identifier>
+                <symbol> ( </symbol>
+                <expressionList>
+                </expressionList>
+                <symbol> ) </symbol>
+                <symbol> ; </symbol>
+              </doStatement>
+            </statements>
+              <symbol> } </symbol>
+            </ifStatement>
+          </statements>
+          <symbol> } </symbol>
+        </whileStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> printGameEndMessage </identifier>
+          <symbol> ( </symbol>
+          <expressionList>
+          </expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>
+    </subroutineBody>
+  </subroutineDec>
+  <subroutineDec>
+    <keyword> method </keyword>
+    <keyword> void </keyword>
+    <identifier> clearAliens </identifier>
+    <symbol> ( </symbol>
+    <parameterList>
+    </parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> Alien </identifier>
+        <identifier> thisAlien </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> i </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> i </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <whileStatement>
+          <keyword> while </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> i </identifier>
+            </term>
+            <symbol> &lt; </symbol>
+            <term>
+              <identifier> numAliens </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> thisAlien </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> aliens </identifier>
+                  <symbol> [ </symbol>
+                  <expression>
+                    <term>
+                      <identifier> i </identifier>
+                    </term>
+                  </expression>
+                  <symbol> ] </symbol>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <ifStatement>
+              <keyword> if </keyword>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <identifier> thisAlien </identifier>
+                  <symbol> . </symbol>
+                  <identifier> isAlive </identifier>
+                  <symbol> ( </symbol>
+                  <expressionList>
+                  </expressionList>
+                  <symbol> ) </symbol>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+              <symbol> { </symbol>
+            <statements>
+              <doStatement>
+                <keyword> do </keyword>
+                <identifier> thisAlien </identifier>
+                <symbol> . </symbol>
+                <identifier> erase </identifier>
+                <symbol> ( </symbol>
+                <expressionList>
+                </expressionList>
+                <symbol> ) </symbol>
+                <symbol> ; </symbol>
+              </doStatement>
+            </statements>
+              <symbol> } </symbol>
+            </ifStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> i </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <integerConstant> 1 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+          </statements>
+          <symbol> } </symbol>
+        </whileStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>
+    </subroutineBody>
+  </subroutineDec>
+  <subroutineDec>
+    <keyword> method </keyword>
+    <keyword> void </keyword>
+    <identifier> moveAliensDown </identifier>
+    <symbol> ( </symbol>
+    <parameterList>
+    </parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> Alien </identifier>
+        <identifier> thisAlien </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> i </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> i </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <whileStatement>
+          <keyword> while </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> i </identifier>
+            </term>
+            <symbol> &lt; </symbol>
+            <term>
+              <identifier> numAliens </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> thisAlien </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> aliens </identifier>
+                  <symbol> [ </symbol>
+                  <expression>
+                    <term>
+                      <identifier> i </identifier>
+                    </term>
+                  </expression>
+                  <symbol> ] </symbol>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <ifStatement>
+              <keyword> if </keyword>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <identifier> thisAlien </identifier>
+                  <symbol> . </symbol>
+                  <identifier> isAlive </identifier>
+                  <symbol> ( </symbol>
+                  <expressionList>
+                  </expressionList>
+                  <symbol> ) </symbol>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+              <symbol> { </symbol>
+            <statements>
+              <ifStatement>
+                <keyword> if </keyword>
+                <symbol> ( </symbol>
+                <expression>
+                  <term>
+                    <symbol> ~ </symbol>
+                    <term>
+                      <symbol> ( </symbol>
+                      <expression>
+                        <term>
+                          <identifier> thisAlien </identifier>
+                          <symbol> . </symbol>
+                          <identifier> moveDown </identifier>
+                          <symbol> ( </symbol>
+                          <expressionList>
+                          </expressionList>
+                          <symbol> ) </symbol>
+                        </term>
+                      </expression>
+                      <symbol> ) </symbol>
+                    </term>
+                  </term>
+                </expression>
+                <symbol> ) </symbol>
+                <symbol> { </symbol>
+              <statements>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> exit </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <keyword> true </keyword>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> win </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <keyword> false </keyword>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+              </statements>
+                <symbol> } </symbol>
+              </ifStatement>
+            </statements>
+              <symbol> } </symbol>
+            </ifStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> i </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <integerConstant> 1 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+          </statements>
+          <symbol> } </symbol>
+        </whileStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>
+    </subroutineBody>
+  </subroutineDec>
+  <subroutineDec>
+    <keyword> method </keyword>
+    <keyword> void </keyword>
+    <identifier> moveAliensLeftRight </identifier>
+    <symbol> ( </symbol>
+    <parameterList>
+      <keyword> boolean </keyword>
+      <identifier> moveRight </identifier>
+    </parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> Alien </identifier>
+        <identifier> thisAlien </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> i </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> i </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <ifStatement>
+          <keyword> if </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> moveRight </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+        <statements>
+          <whileStatement>
+            <keyword> while </keyword>
+            <symbol> ( </symbol>
+            <expression>
+              <term>
+                <identifier> i </identifier>
+              </term>
+              <symbol> &lt; </symbol>
+              <term>
+                <identifier> numAliens </identifier>
+              </term>
+            </expression>
+            <symbol> ) </symbol>
+            <symbol> { </symbol>
+            <statements>
+              <letStatement>
+                <keyword> let </keyword>
+                <identifier> thisAlien </identifier>
+                <symbol> = </symbol>
+                <expression>
+                  <term>
+                    <identifier> aliens </identifier>
+                    <symbol> [ </symbol>
+                    <expression>
+                      <term>
+                        <identifier> i </identifier>
+                      </term>
+                    </expression>
+                    <symbol> ] </symbol>
+                  </term>
+                </expression>
+                <symbol> ; </symbol>
+              </letStatement>
+              <ifStatement>
+                <keyword> if </keyword>
+                <symbol> ( </symbol>
+                <expression>
+                  <term>
+                    <identifier> thisAlien </identifier>
+                    <symbol> . </symbol>
+                    <identifier> isAlive </identifier>
+                    <symbol> ( </symbol>
+                    <expressionList>
+                    </expressionList>
+                    <symbol> ) </symbol>
+                  </term>
+                </expression>
+                <symbol> ) </symbol>
+                <symbol> { </symbol>
+              <statements>
+                <doStatement>
+                  <keyword> do </keyword>
+                  <identifier> thisAlien </identifier>
+                  <symbol> . </symbol>
+                  <identifier> moveRight </identifier>
+                  <symbol> ( </symbol>
+                  <expressionList>
+                  </expressionList>
+                  <symbol> ) </symbol>
+                  <symbol> ; </symbol>
+                </doStatement>
+              </statements>
+                <symbol> } </symbol>
+              </ifStatement>
+              <letStatement>
+                <keyword> let </keyword>
+                <identifier> i </identifier>
+                <symbol> = </symbol>
+                <expression>
+                  <term>
+                    <identifier> i </identifier>
+                  </term>
+                  <symbol> + </symbol>
+                  <term>
+                    <integerConstant> 1 </integerConstant>
+                  </term>
+                </expression>
+                <symbol> ; </symbol>
+              </letStatement>
+            </statements>
+            <symbol> } </symbol>
+          </whileStatement>
+        </statements>
+          <symbol> } </symbol>
+          <keyword> else </keyword>
+          <symbol> { </symbol>
+          <statements>
+            <whileStatement>
+              <keyword> while </keyword>
+              <symbol> ( </symbol>
+              <expression>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+                <symbol> &lt; </symbol>
+                <term>
+                  <identifier> numAliens </identifier>
+                </term>
+              </expression>
+              <symbol> ) </symbol>
+              <symbol> { </symbol>
+              <statements>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> thisAlien </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <identifier> aliens </identifier>
+                      <symbol> [ </symbol>
+                      <expression>
+                        <term>
+                          <identifier> i </identifier>
+                        </term>
+                      </expression>
+                      <symbol> ] </symbol>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+                <ifStatement>
+                  <keyword> if </keyword>
+                  <symbol> ( </symbol>
+                  <expression>
+                    <term>
+                      <identifier> thisAlien </identifier>
+                      <symbol> . </symbol>
+                      <identifier> isAlive </identifier>
+                      <symbol> ( </symbol>
+                      <expressionList>
+                      </expressionList>
+                      <symbol> ) </symbol>
+                    </term>
+                  </expression>
+                  <symbol> ) </symbol>
+                  <symbol> { </symbol>
+                <statements>
+                  <doStatement>
+                    <keyword> do </keyword>
+                    <identifier> thisAlien </identifier>
+                    <symbol> . </symbol>
+                    <identifier> moveLeft </identifier>
+                    <symbol> ( </symbol>
+                    <expressionList>
+                    </expressionList>
+                    <symbol> ) </symbol>
+                    <symbol> ; </symbol>
+                  </doStatement>
+                </statements>
+                  <symbol> } </symbol>
+                </ifStatement>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <identifier> i </identifier>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <identifier> i </identifier>
+                    </term>
+                    <symbol> + </symbol>
+                    <term>
+                      <integerConstant> 1 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+              </statements>
+              <symbol> } </symbol>
+            </whileStatement>
+          </statements>
+          <symbol> } </symbol>
+        </ifStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>
+    </subroutineBody>
+  </subroutineDec>
+  <subroutineDec>
+    <keyword> method </keyword>
+    <keyword> void </keyword>
+    <identifier> controlLasers </identifier>
+    <symbol> ( </symbol>
+    <parameterList>
+    </parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> boolean </keyword>
+        <identifier> laserMoving </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> laserX </identifier>
+        <symbol> , </symbol>
+        <identifier> laserY </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> alienX </identifier>
+        <symbol> , </symbol>
+        <identifier> alienY </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> Alien </identifier>
+        <identifier> thisAlien </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> i </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <statements>
+        <ifStatement>
+          <keyword> if </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> shotOnScreen </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+        <statements>
+          <letStatement>
+            <keyword> let </keyword>
+            <identifier> laserMoving </identifier>
+            <symbol> = </symbol>
+            <expression>
+              <term>
+                <identifier> laser </identifier>
+                <symbol> . </symbol>
+                <identifier> move </identifier>
+                <symbol> ( </symbol>
+                <expressionList>
+                </expressionList>
+                <symbol> ) </symbol>
+              </term>
+            </expression>
+            <symbol> ; </symbol>
+          </letStatement>
+          <ifStatement>
+            <keyword> if </keyword>
+            <symbol> ( </symbol>
+            <expression>
+              <term>
+                <symbol> ~ </symbol>
+                <term>
+                  <identifier> laserMoving </identifier>
+                </term>
+              </term>
+            </expression>
+            <symbol> ) </symbol>
+            <symbol> { </symbol>
+          <statements>
+            <doStatement>
+              <keyword> do </keyword>
+              <identifier> laser </identifier>
+              <symbol> . </symbol>
+              <identifier> dispose </identifier>
+              <symbol> ( </symbol>
+              <expressionList>
+              </expressionList>
+              <symbol> ) </symbol>
+              <symbol> ; </symbol>
+            </doStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> shotOnScreen </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <keyword> false </keyword>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+          </statements>
+            <symbol> } </symbol>
+            <keyword> else </keyword>
+            <symbol> { </symbol>
+            <statements>
+              <letStatement>
+                <keyword> let </keyword>
+                <identifier> laserX </identifier>
+                <symbol> = </symbol>
+                <expression>
+                  <term>
+                    <identifier> laser </identifier>
+                    <symbol> . </symbol>
+                    <identifier> getX </identifier>
+                    <symbol> ( </symbol>
+                    <expressionList>
+                    </expressionList>
+                    <symbol> ) </symbol>
+                  </term>
+                </expression>
+                <symbol> ; </symbol>
+              </letStatement>
+              <letStatement>
+                <keyword> let </keyword>
+                <identifier> laserY </identifier>
+                <symbol> = </symbol>
+                <expression>
+                  <term>
+                    <identifier> laser </identifier>
+                    <symbol> . </symbol>
+                    <identifier> getY </identifier>
+                    <symbol> ( </symbol>
+                    <expressionList>
+                    </expressionList>
+                    <symbol> ) </symbol>
+                  </term>
+                </expression>
+                <symbol> ; </symbol>
+              </letStatement>
+              <letStatement>
+                <keyword> let </keyword>
+                <identifier> i </identifier>
+                <symbol> = </symbol>
+                <expression>
+                  <term>
+                    <integerConstant> 0 </integerConstant>
+                  </term>
+                </expression>
+                <symbol> ; </symbol>
+              </letStatement>
+              <whileStatement>
+                <keyword> while </keyword>
+                <symbol> ( </symbol>
+                <expression>
+                  <term>
+                    <identifier> i </identifier>
+                  </term>
+                  <symbol> &lt; </symbol>
+                  <term>
+                    <identifier> numAliens </identifier>
+                  </term>
+                </expression>
+                <symbol> ) </symbol>
+                <symbol> { </symbol>
+                <statements>
+                  <letStatement>
+                    <keyword> let </keyword>
+                    <identifier> thisAlien </identifier>
+                    <symbol> = </symbol>
+                    <expression>
+                      <term>
+                        <identifier> aliens </identifier>
+                        <symbol> [ </symbol>
+                        <expression>
+                          <term>
+                            <identifier> i </identifier>
+                          </term>
+                        </expression>
+                        <symbol> ] </symbol>
+                      </term>
+                    </expression>
+                    <symbol> ; </symbol>
+                  </letStatement>
+                  <ifStatement>
+                    <keyword> if </keyword>
+                    <symbol> ( </symbol>
+                    <expression>
+                      <term>
+                        <identifier> thisAlien </identifier>
+                        <symbol> . </symbol>
+                        <identifier> isAlive </identifier>
+                        <symbol> ( </symbol>
+                        <expressionList>
+                        </expressionList>
+                        <symbol> ) </symbol>
+                      </term>
+                    </expression>
+                    <symbol> ) </symbol>
+                    <symbol> { </symbol>
+                  <statements>
+                    <letStatement>
+                      <keyword> let </keyword>
+                      <identifier> alienX </identifier>
+                      <symbol> = </symbol>
+                      <expression>
+                        <term>
+                          <identifier> thisAlien </identifier>
+                          <symbol> . </symbol>
+                          <identifier> getX </identifier>
+                          <symbol> ( </symbol>
+                          <expressionList>
+                          </expressionList>
+                          <symbol> ) </symbol>
+                        </term>
+                      </expression>
+                      <symbol> ; </symbol>
+                    </letStatement>
+                    <letStatement>
+                      <keyword> let </keyword>
+                      <identifier> alienY </identifier>
+                      <symbol> = </symbol>
+                      <expression>
+                        <term>
+                          <identifier> thisAlien </identifier>
+                          <symbol> . </symbol>
+                          <identifier> getY </identifier>
+                          <symbol> ( </symbol>
+                          <expressionList>
+                          </expressionList>
+                          <symbol> ) </symbol>
+                        </term>
+                      </expression>
+                      <symbol> ; </symbol>
+                    </letStatement>
+                    <ifStatement>
+                      <keyword> if </keyword>
+                      <symbol> ( </symbol>
+                      <expression>
+                        <term>
+                          <identifier> laserX </identifier>
+                        </term>
+                        <symbol> &gt; </symbol>
+                        <term>
+                          <symbol> ( </symbol>
+                          <expression>
+                            <term>
+                              <identifier> alienX </identifier>
+                            </term>
+                            <symbol> - </symbol>
+                            <term>
+                              <integerConstant> 1 </integerConstant>
+                            </term>
+                          </expression>
+                          <symbol> ) </symbol>
+                        </term>
+                      </expression>
+                      <symbol> ) </symbol>
+                      <symbol> { </symbol>
+                    <statements>
+                      <ifStatement>
+                        <keyword> if </keyword>
+                        <symbol> ( </symbol>
+                        <expression>
+                          <term>
+                            <identifier> laserX </identifier>
+                          </term>
+                          <symbol> &lt; </symbol>
+                          <term>
+                            <symbol> ( </symbol>
+                            <expression>
+                              <term>
+                                <identifier> alienX </identifier>
+                              </term>
+                              <symbol> + </symbol>
+                              <term>
+                                <identifier> alienSize </identifier>
+                              </term>
+                              <symbol> - </symbol>
+                              <term>
+                                <integerConstant> 1 </integerConstant>
+                              </term>
+                            </expression>
+                            <symbol> ) </symbol>
+                          </term>
+                        </expression>
+                        <symbol> ) </symbol>
+                        <symbol> { </symbol>
+                      <statements>
+                        <ifStatement>
+                          <keyword> if </keyword>
+                          <symbol> ( </symbol>
+                          <expression>
+                            <term>
+                              <identifier> laserY </identifier>
+                            </term>
+                            <symbol> &gt; </symbol>
+                            <term>
+                              <symbol> ( </symbol>
+                              <expression>
+                                <term>
+                                  <identifier> alienY </identifier>
+                                </term>
+                                <symbol> - </symbol>
+                                <term>
+                                  <integerConstant> 1 </integerConstant>
+                                </term>
+                              </expression>
+                              <symbol> ) </symbol>
+                            </term>
+                          </expression>
+                          <symbol> ) </symbol>
+                          <symbol> { </symbol>
+                        <statements>
+                          <ifStatement>
+                            <keyword> if </keyword>
+                            <symbol> ( </symbol>
+                            <expression>
+                              <term>
+                                <identifier> laserY </identifier>
+                              </term>
+                              <symbol> &lt; </symbol>
+                              <term>
+                                <symbol> ( </symbol>
+                                <expression>
+                                  <term>
+                                    <identifier> alienY </identifier>
+                                  </term>
+                                  <symbol> + </symbol>
+                                  <term>
+                                    <identifier> alienSize </identifier>
+                                  </term>
+                                  <symbol> - </symbol>
+                                  <term>
+                                    <integerConstant> 1 </integerConstant>
+                                  </term>
+                                </expression>
+                                <symbol> ) </symbol>
+                              </term>
+                            </expression>
+                            <symbol> ) </symbol>
+                            <symbol> { </symbol>
+                          <statements>
+                            <doStatement>
+                              <keyword> do </keyword>
+                              <identifier> laser </identifier>
+                              <symbol> . </symbol>
+                              <identifier> dispose </identifier>
+                              <symbol> ( </symbol>
+                              <expressionList>
+                              </expressionList>
+                              <symbol> ) </symbol>
+                              <symbol> ; </symbol>
+                            </doStatement>
+                            <letStatement>
+                              <keyword> let </keyword>
+                              <identifier> shotOnScreen </identifier>
+                              <symbol> = </symbol>
+                              <expression>
+                                <term>
+                                  <keyword> false </keyword>
+                                </term>
+                              </expression>
+                              <symbol> ; </symbol>
+                            </letStatement>
+                            <doStatement>
+                              <keyword> do </keyword>
+                              <identifier> thisAlien </identifier>
+                              <symbol> . </symbol>
+                              <identifier> destroy </identifier>
+                              <symbol> ( </symbol>
+                              <expressionList>
+                              </expressionList>
+                              <symbol> ) </symbol>
+                              <symbol> ; </symbol>
+                            </doStatement>
+                            <doStatement>
+                              <keyword> do </keyword>
+                              <identifier> board </identifier>
+                              <symbol> . </symbol>
+                              <identifier> updateScore </identifier>
+                              <symbol> ( </symbol>
+                              <expressionList>
+                              </expressionList>
+                              <symbol> ) </symbol>
+                              <symbol> ; </symbol>
+                            </doStatement>
+                            <letStatement>
+                              <keyword> let </keyword>
+                              <identifier> i </identifier>
+                              <symbol> = </symbol>
+                              <expression>
+                                <term>
+                                  <identifier> numAliens </identifier>
+                                </term>
+                              </expression>
+                              <symbol> ; </symbol>
+                            </letStatement>
+                          </statements>
+                            <symbol> } </symbol>
+                          </ifStatement>
+                        </statements>
+                          <symbol> } </symbol>
+                        </ifStatement>
+                      </statements>
+                        <symbol> } </symbol>
+                      </ifStatement>
+                    </statements>
+                      <symbol> } </symbol>
+                    </ifStatement>
+                  </statements>
+                    <symbol> } </symbol>
+                  </ifStatement>
+                  <letStatement>
+                    <keyword> let </keyword>
+                    <identifier> i </identifier>
+                    <symbol> = </symbol>
+                    <expression>
+                      <term>
+                        <identifier> i </identifier>
+                      </term>
+                      <symbol> + </symbol>
+                      <term>
+                        <integerConstant> 1 </integerConstant>
+                      </term>
+                    </expression>
+                    <symbol> ; </symbol>
+                  </letStatement>
+                </statements>
+                <symbol> } </symbol>
+              </whileStatement>
+              <letStatement>
+                <keyword> let </keyword>
+                <identifier> exit </identifier>
+                <symbol> = </symbol>
+                <expression>
+                  <term>
+                    <identifier> checkAliens </identifier>
+                    <symbol> ( </symbol>
+                    <expressionList>
+                    </expressionList>

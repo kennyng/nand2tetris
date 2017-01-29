@@ -1,0 +1,169 @@
+function Alien.new 0
+push constant 5
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 2
+push constant 2
+call Math.divide 2
+pop this 2
+push argument 2
+pop this 3
+push constant 0
+not
+pop this 4
+push pointer 0
+call Alien.draw 1
+pop temp 0
+push pointer 0
+return
+function Alien.getX 0
+push argument 0
+pop pointer 0
+push this 0
+push this 2
+sub
+return
+function Alien.getY 0
+push argument 0
+pop pointer 0
+push this 1
+push this 2
+sub
+return
+function Alien.isAlive 0
+push argument 0
+pop pointer 0
+push this 4
+return
+function Alien.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Alien.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 2
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Alien.moveLeft 0
+push argument 0
+pop pointer 0
+push this 0
+push this 3
+push constant 20
+add
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+push this 3
+sub
+pop this 0
+push pointer 0
+call Alien.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Alien.moveRight 0
+push argument 0
+pop pointer 0
+push this 0
+push this 3
+add
+push constant 490
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+push this 3
+add
+pop this 0
+push pointer 0
+call Alien.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Alien.moveDown 0
+push argument 0
+pop pointer 0
+push this 1
+push this 3
+add
+push constant 225
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 1
+push this 3
+add
+pop this 1
+push pointer 0
+call Alien.draw 1
+pop temp 0
+goto IF_END0
+label IF_FALSE0
+push this 4
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 1
+push this 3
+add
+pop this 1
+push pointer 0
+call Alien.draw 1
+pop temp 0
+push constant 0
+return
+label IF_FALSE1
+label IF_END0
+push constant 0
+not
+return
+function Alien.destroy 0
+push argument 0
+pop pointer 0
+push constant 0
+pop this 4
+push pointer 0
+call Alien.erase 1
+pop temp 0
+push constant 0
+return
+function Alien.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Alien.erase 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

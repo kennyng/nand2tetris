@@ -1,0 +1,77 @@
+/**
+ * The Laser class implements a laser beam (as a graphic rectangle).
+ * A laser has a location on the screen and a size. It also has
+ * methods for drawing, erasing, and moving on the screen.
+ */
+class Laser {
+    // location on the screen
+    field int x, y;
+    // the size of the laser beam
+    field int size;
+    
+    /** 
+     * Constructs a new laser (a rectangle) with a given location and size.
+     * Parameters: initX -- the initial x-coordinate (int)
+     *             laserSize -- the size of the laser beam (rectangle)
+     */   
+    constructor Laser new(int initX, int laserSize) {     
+        let x = initX;
+        // INITIAL_Y = 234
+	    let y = 234 - (3 * laserSize);
+	    let size = laserSize;
+	    do draw();
+	    return this;
+    }
+    
+    /** Returns the x-coordinate of the laser's location. */
+    method int getX() {
+        return x;
+    }
+    
+    /** Returns the y-coordinate of the laser's location. */
+    method int getY() {
+        return y;
+    }
+    
+    /** Draws the laser on the screen. */
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, (x + size), (y + (3*size)));
+        return;
+    }
+    
+    /** Erases the laser from the screen. */
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y, (x + size), (y + (3*size)));
+        return;
+    }
+
+    /**  
+     * Moves the laser beam up by 15 pixels.
+     * Returns true if the laser has/can be moved.
+     */
+    method boolean move() {
+        // UPPER_BOUND = 32
+        if (y > 32) {
+            do erase();
+            // Pixels to decrement for every movement = 20
+            let y = y - 20;
+            do draw();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /** Clears the object from screen and deallocates the object's memory. */
+    method void dispose() {
+        do erase();
+        do Memory.deAlloc(this);
+        return;
+    }
+    
+}
+    
+		    
+

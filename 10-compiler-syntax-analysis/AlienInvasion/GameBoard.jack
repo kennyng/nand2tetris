@@ -1,0 +1,80 @@
+/**
+ * The GameBoard class implements the game board (background details and stats). It draws the
+ * boundary lines and the status bar (contains title, score, and shots taken information). It also
+ * has methods to update the score and to update the number of shots taken.
+ */
+class GameBoard {
+    field int score;
+    field int shotsTaken;    
+    
+    /** Constructs a new game board and sets up the boundary lines and the status bar. */
+    constructor GameBoard new() {
+        let score = 0;
+        let shotsTaken = 0;
+        do Screen.drawLine(0, 15, 511, 15); 
+        do Output.moveCursor(0, 22);
+        do Output.printString("[ ALIEN INVASION ]");
+        do drawStatusBar();
+        do drawBaseBoundaryLines();
+        return this;
+    }
+    
+    /** 
+     * Increments the score by constant and re-draws the status bar. 
+     * Called whenever an alien is hit. 
+     */
+    method void updateScore() {
+        // each alien hit is worth 250 points
+        let score = score + 250;
+        do drawStatusBar();
+        return;
+    }
+    
+    /** 
+     * Decrements the score by a fixed constant and increments the number of shots taken.
+     * Re-draws the status bar. Called when ever a laser is shot. 
+     */
+    method void updateShotsTaken() {
+        // each laser shot deducts 50 points
+        let score = score - 50;
+        let shotsTaken = shotsTaken + 1;
+        do drawStatusBar();
+        return;
+    }
+    
+    /**
+     * Draws the status bar (score and shots taken information) to the screen.
+     * The score is cleared with spaces first before updating to new score because a
+     * previous score may have more digits than the new score.
+     */
+    method void drawStatusBar() {
+        do Output.moveCursor(0, 2);
+        do Output.printString("SCORE: ");
+        // clears the score before drawing new score
+        do Output.moveCursor(0, 9);
+        do Output.printString("          ");
+        do Output.moveCursor(0, 9);
+        do Output.printInt(score);
+        do Output.moveCursor(0, 47);
+        do Output.printString("SHOTS TAKEN: ");
+        do Output.printInt(shotsTaken);
+        return;
+    }
+    
+    /** 
+     * Draws the boundary lines indicating the base. If the alien reaches past the 
+     * boundary lines, then player loses. 
+     * (Added to make it easier for players to tell how close aliens actually are).
+     */
+    method void drawBaseBoundaryLines() {
+        do Screen.drawLine(0, 225, 20, 225);
+        do Screen.drawLine(490, 225, 511, 225);
+        return;
+    }
+
+    /** Deallocates the object's memory. */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}

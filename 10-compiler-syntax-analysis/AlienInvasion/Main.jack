@@ -1,0 +1,10 @@
+/** Initializes AlienInvasion object and runs game. Disposes game after game terminates. */
+class Main {
+    function void main() {
+        var AlienInvasion gameSession;
+        let gameSession = AlienInvasion.new();
+        do gameSession.run();
+        do gameSession.dispose();
+        return;
+    }
+}
